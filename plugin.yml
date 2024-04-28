@@ -1,0 +1,11 @@
+name: EssentialsKiller
+version: 1.0
+author: Maestro
+main: eu.maestro.essentialskiller.EssentialsKillerPlugin
+commands:
+  ping:
+    description: This command allows you to see your own ping or a specific player ping
+    usage: /ping <player>
+  tps:
+    description: This command allows you to see how much tps there is on the server
+    usage: /tps
