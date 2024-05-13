@@ -4,6 +4,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import eu.maestro.essentialskiller.commands.PingCommandHandler;
+import eu.maestro.essentialskiller.commands.SpawnCommandHandler;
 import eu.maestro.essentialskiller.events.PlayerChatEventHandler;
 import eu.maestro.essentialskiller.events.PlayerCommandPreprocessEventHandler;
 import eu.maestro.essentialskiller.events.PlayerJoinEventHandler;
@@ -25,6 +26,7 @@ public class EssentialsKillerPlugin extends JavaPlugin {
 	
 	private void registerCommands() {
 		this.getCommand("ping").setExecutor(new PingCommandHandler());
+		this.getCommand("spawn").setExecutor(new SpawnCommandHandler());
 	}
 	
 	private void registerEvents() {
