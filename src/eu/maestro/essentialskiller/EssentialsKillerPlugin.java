@@ -14,10 +14,12 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -25,9 +27,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 
-import eu.maestro.essentialskiller.commands.BackCommandHandler;
 import eu.maestro.essentialskiller.commands.BackCommandHandler;
 import eu.maestro.essentialskiller.commands.PingCommandHandler;
 import eu.maestro.essentialskiller.commands.SpawnCommandHandler;
@@ -89,9 +91,27 @@ public class EssentialsKillerPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         Item droppedItem = event.getItemDrop();
+        Material material = droppedItem.getItemStack().getType();
         
-        if (droppedItem != null && Arrays.asList(Material.GLASS_BOTTLE, Material.BOWL).contains(droppedItem.getItemStack().getType())) {
+        if (Arrays.asList(Material.GLASS_BOTTLE, Material.BOWL).contains(material)) {
             droppedItem.remove();
+        }
+        if (Arrays.asList(
+        		Material.DIAMOND_AXE, Material.DIAMOND_SWORD,
+        		Material.IRON_SWORD, Material.IRON_AXE,
+        		Material.WOOD_AXE, Material.MUSHROOM_SOUP).contains(material)) {
+        	if (!event.getPlayer().isSneaking()) {
+        		event.getPlayer().sendMessage("Sneak to confirm dropping your item");
+        		event.setCancelled(true);
+        	}
+        }
+    }
+    
+    @EventHandler
+    public void onProjectileHit(final ProjectileHitEvent ev) {
+        final Projectile entity = ev.getEntity();
+        if (entity.getType() == EntityType.ARROW && (entity.isOnGround())) {
+            entity.remove();
         }
     }
     
