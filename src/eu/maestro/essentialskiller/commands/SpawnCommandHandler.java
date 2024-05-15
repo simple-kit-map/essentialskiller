@@ -15,6 +15,6 @@ public class SpawnCommandHandler implements CommandExecutor {
 
 		final Player player = (Player)sender;
 		player.teleport(location);
-		return false;
+		return true;
 	}
 }
