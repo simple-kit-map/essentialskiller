@@ -15,7 +15,7 @@ public class WarpCommandHandler implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
 		if (args.length == 0) {
-			sender.sendMessage("usage: /warp <warp>");
+			sender.sendMessage(ChatColor.RED + "usage: /warp <warp>");
 			
 			sender.sendMessage(
 				ChatColor.GRAY + "There are " +
