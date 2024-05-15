@@ -12,7 +12,7 @@ commands:
     usage: /spawn
   warp:
      description: idk how to define a warp bro
-     aliases: [w]
+     aliases: [w, warps]
      usage: /warp <warp>
   back:
      description: last death
