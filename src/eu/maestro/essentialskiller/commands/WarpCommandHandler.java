@@ -1,15 +1,34 @@
 package eu.maestro.essentialskiller.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import eu.maestro.essentialskiller.SavedLocation;
 import net.md_5.bungee.api.ChatColor;
 
-public class WarpCommandHandler implements CommandExecutor {
+public class WarpCommandHandler implements CommandExecutor, TabExecutor {
+	
+	@Override
+	
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		
+		
+
+		List<String> locationNames = new ArrayList<String>();
+		for (SavedLocation location : SavedLocation.locations) {
+			locationNames.add(location.getName());
+		}
+
+		return locationNames;
+
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
