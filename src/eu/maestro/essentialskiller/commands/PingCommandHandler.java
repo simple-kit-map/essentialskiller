@@ -3,7 +3,6 @@ package eu.maestro.essentialskiller.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
@@ -19,20 +18,20 @@ public class PingCommandHandler implements CommandExecutor {
 				return true;
 			}
 			
-			final CraftPlayer player = (CraftPlayer)sender;
-			player.sendMessage("Your ping is: " + player.getHandle().ping);
+			final Player player = (Player)sender;
+			player.sendMessage("Your ping is: " + player.getPing());
 			return true;
 		}
 		else if(args.length == 1) {
 			
-			final CraftPlayer player = (CraftPlayer)sender.getServer().getPlayer(args[0]);
+			final Player player = (Player)sender.getServer().getPlayer(args[0]);
 			
 			if(player == null) {
 				sender.sendMessage(ChatColor.RED + args[0] + " not found");
 				return true;
 			}
 			
-			sender.sendMessage(args[0] + "'s ping is: " + player.getHandle().ping);
+			sender.sendMessage(args[0] + "'s ping is: " + player.getPing());
 			return true;
 		}
 		
